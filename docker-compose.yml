@@ -1,0 +1,26 @@
+version: '3'
+services:
+  legaltechtales-backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    image: lisi-cao/legaltechtales-backend:latest
+    ports:
+      - "3000:3000"
+    depends_on:
+      - legaltechtales-db
+    environment:
+      - MONGO_URI=mongodb://legaltechtales-db:27017/legaltechtale
+
+  legaltechtales-frontend:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: lisi-cao/legaltechtales-frontend:latest
+    ports:
+      - "8080:3000"
+
+  legaltechtales-db:
+    image: mongo
+    ports:
+      - "27017:27017"
