@@ -5,8 +5,8 @@ const articleSchema = new mongoose.Schema({
   title: String,
   body: String,
   creationTime: { type: Date, default: Date.now },
-  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
-});
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }]
+}, { timestamps: true });
 
 const Article = mongoose.model('Article', articleSchema);
 
