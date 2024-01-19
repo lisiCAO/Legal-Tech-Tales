@@ -11,6 +11,8 @@ services:
       - legaltechtales-db
     environment:
       - MONGO_URI=mongodb://legaltechtales-db:27017/legaltechtale
+    volumes:
+      - ./backend:/app
 
   legaltechtales-frontend:
     build: 
@@ -19,6 +21,8 @@ services:
     image: lisi-cao/legaltechtales-frontend:latest
     ports:
       - "8080:3000"
+    volumes:
+      - ./frontend:/app
 
   legaltechtales-db:
     image: mongo
