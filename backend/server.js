@@ -1,19 +1,15 @@
 const express = require('express');
-const mongoose = require('mongoose');
-// set up a basic express and mongoose to connect mongoDB
+const connectDB = require('./database/database');
+const userRoutes = require('./routes/userRoutes');
+const articleRoutes = require('./routes/articleRoutes');
+
+// set up a basic express 
 const app = express();
 
-// Connect to MongoDB
-mongoose.connect('mongodb://legaltechtales-db:27017/legaltechtale', { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => {
-        console.log('Connected to MongoDB');
-        // Add your server logic here
-    })
-    .catch((error) => {
-        console.error('Error connecting to MongoDB:', error);
-    });
-
 // Add your express routes and middleware here
+app.use(express.json());
+app.use('/api/users', userRoutes);
+app.use('/api/articles', articleRoutes);
 
 // Start the server
 const port = 3000;

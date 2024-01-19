@@ -1,13 +1,15 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-const User = require('./models/user');
-const Article = require('./models/article');
-const Comment = require('./models/comment');
+const User = require('./../models/user');
+const Article = require('./../models/article');
+const Comment = require('./../models/comment');
 
 const users = require('./seed/users');
 const articles = require('./seed/articles');
 const comments = require('./seed/comments');
-mongoose.connect('mongodb://legaltechtales-db:27017/legaltechtale');
+const connectDB = require('./database');
+
+connectDB();
 
 const seedDB = async () => {
     await User.deleteMany({});
