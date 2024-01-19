@@ -2,7 +2,9 @@ const express = require('express');
 const connectDB = require('./database/database');
 const userRoutes = require('./routes/userRoutes');
 const articleRoutes = require('./routes/articleRoutes');
+require('dotenv').config();
 
+connectDB();
 // set up a basic express 
 const app = express();
 
