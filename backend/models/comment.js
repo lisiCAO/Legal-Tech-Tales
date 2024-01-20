@@ -1,9 +1,13 @@
 const mongoose = require('mongoose');
 
 const commentSchema = new mongoose.Schema({
-  articleId: mongoose.Schema.Types.ObjectId,
-  authorId: mongoose.Schema.Types.ObjectId,
-  body: String,
+  articleId: { type: mongoose.Schema.Types.ObjectId, ref: 'Article', required: true },
+  authorId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  body: {
+    type: String,
+    required: true,
+    minlength: [5, 'Comment must be at least 5 characters long.']
+  },
   creationTime: { type: Date, default: Date.now }
 }, { timestamps: true });
 
