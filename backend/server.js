@@ -1,10 +1,10 @@
 const express = require('express');
 const connectDB = require('./database/database');
+connectDB();
 const userRoutes = require('./routes/userRoutes');
 const articleRoutes = require('./routes/articleRoutes');
+const commentRoutes = require('./routes/commentRoutes')
 require('dotenv').config();
-
-connectDB();
 // set up a basic express 
 const app = express();
 
@@ -12,6 +12,7 @@ const app = express();
 app.use(express.json());
 app.use('/api/users', userRoutes);
 app.use('/api/articles', articleRoutes);
+app.use('/api/comments',commentRoutes);
 
 // Start the server
 const port = 3000;
