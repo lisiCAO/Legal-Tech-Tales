@@ -15,7 +15,6 @@ exports.getUser = async (req, res) => {
   }
 };
 
-
 exports.register = async (req, res) => {
   try {
     const existingUser = await User.findOne({ email: req.body.email });
