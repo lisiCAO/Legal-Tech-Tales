@@ -27,9 +27,9 @@ exports.addArticle = async (req, res) => {
   }
 };
 
-exports.viewArticle = async (req, res) => {
+exports.viewArticleById = async (req, res) => {
   try {
-    const articleId = req.params.id;
+    const articleId = req.params.articleId;
     const article = await Article.findById(articleId).populate('comments');
 
     if (!article) {
@@ -41,6 +41,19 @@ exports.viewArticle = async (req, res) => {
     res.status(500).send('Error retrieving article');
   }
 };
+
+exports.viewArticleBySlug = async (req, res) => {
+  try {
+    const slug = req.params.slug;
+    const article = await Article.findOne({ slug: slug }).populate('comments');
+    if(!article) {
+      return res.status(404).send('Article not found');
+    }
+    res.send(article);
+  } catch(error) {
+    res.status(500).send('Error retrieving article')
+  }
+}
 
 exports.listArticles = async (req, res) => {
   try {

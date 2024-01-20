@@ -8,6 +8,8 @@ router.get('/', articleController.listArticles);
 
 router.post('/add', authenticateToken, articleController.addArticle);
  
-router.get('/:id', articleController.viewArticle);
+router.get('/id/:articleId', articleController.viewArticleById);
+
+router.get('/:slug', articleController.viewArticleBySlug);
  
 module.exports = router;
