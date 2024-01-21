@@ -57,7 +57,7 @@ exports.login = async (req, res) => {
     if (user && await bcrypt.compare(req.body.password, user.password)) {
       const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
       res.cookie('token', token, { httpOnly: true, maxAge: 3600000 }); // one hour
-      res.send({ token });
+      res.send({ name: user.name }); // Fix: Pass an object with the property 'name'
     } else {
       res.status(400).send('Invalid credentials');
     }

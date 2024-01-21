@@ -1,6 +1,6 @@
 'use client'
 // context/AuthContext.tsx
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 // Define the shape of your context data
 interface AuthContextType {
@@ -21,6 +21,7 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   const router = useRouter();
   const [userName, setUserName] = useState<string | null>(null);
+  const [isLoggedIn, setisLoggedIn] = useState<boolean>(false);
   const getMe = async () => {
     try {
       const response = await fetch('http://localhost:3000/api/users/me', {
@@ -42,42 +43,51 @@ export const AuthProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }
       return null; // 或者返回一个错误信息
     }
   };
+
   const login = async (credentials: { email: string; password: string }) => {
     try {
-      const response = await fetch('http://localhost:3000/api/users/login', {
+      const token = await fetch('http://localhost:3000/api/users/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(credentials),
       });
-
-      if (response.ok) {
-        const currentUser = await getMe(); // 等待 getMe 函数响应
-        if (currentUser && currentUser.name) {
-          setUserName(currentUser.name); // 使用返回的数据中的 name 属性
-          router.push('/articles');
-        } else {
-          throw new Error('Failed to fetch user data');
-        }
-      } else {
-        throw new Error('Failed to login');
+      if (!token.ok) {
+        throw new Error(`Error: ${token.status}`);
       }
+      setisLoggedIn(true);
     } catch (error) {
       console.error('Login error:', error);
     }
   };
-
   
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const userData = await getMe();
+        if (userData) {
+          setUserName(userData.name || null);
+
+        }
+      } catch (error) {
+        console.error('Failed to fetch user data:', error);
+        // 可以在这里处理错误，比如设置为未登录状态
+      }
+    };
+    fetchUserData();
+  }, [isLoggedIn]); // 如果不依赖于外部状态，这里可以是空数组
+  
+
   // Dummy log in/out functionality
   const logOut = async () => {
-    await fetch('http://localhost:3000/api/users/logout', { method: 'POST' });
+    await fetch('http://localhost:3000/api/users/logout', { method: 'POST', credentials: 'include' });
     setUserName(null);
   };
 
   const value = {
     userName,
-    isLoggedIn: !!userName,
+    isLoggedIn,
     login,
     logOut,
   };

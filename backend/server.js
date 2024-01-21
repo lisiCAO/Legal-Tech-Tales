@@ -11,11 +11,10 @@ const commentRoutes = require('./routes/commentRoutes')
 // set up a basic express 
 const app = express();
 
-// Add your express routes and middleware here
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    origin: 'http://localhost:8080', 
+    origin: '*', 
     methods: 'GET,POST,PUT,PATCH,DELETE',
     allowedHeaders: 'Content-Type,Authorization',
     credentials: true
