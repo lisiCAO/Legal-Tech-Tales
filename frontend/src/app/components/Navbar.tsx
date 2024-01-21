@@ -1,3 +1,4 @@
+'use client'
 // components/NavBar.tsx
 import React from 'react';
 import Link from 'next/link';
@@ -9,8 +10,7 @@ const NavBar: React.FC = () => {
   return (
     <nav className="bg-gray-800 text-white p-4">
       <div className="container mx-auto flex justify-between items-center">
-        <Link href="/">
-          <a className="text-xl font-bold">My Blog</a>
+        <Link href="/" className="text-xl font-bold">My Blog
         </Link>
         <div>
           {auth?.isLoggedIn ? (

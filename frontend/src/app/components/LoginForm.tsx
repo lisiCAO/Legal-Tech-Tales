@@ -2,32 +2,16 @@
 'use client';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useAuth } from './../context/AuthContext';
 import Link from 'next/link';
 
 const LoginForm = () => {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
   const router = useRouter();
-
+  const auth = useAuth();
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-
-    try {
-      const response = await fetch('http://localhost:3000/api/users/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(credentials),
-      });
-
-      if (response.ok) {
-        router.push('/dashboard'); // redirect to page after login
-      } else {
-        throw new Error('Failed to login');
-      }
-    } catch (error) {
-      console.error('Login error:', error);
-    }
+    auth?.login(credentials);
   };
 
   const handleChange = (e: { target: { name: any; value: any; }; }) => {
