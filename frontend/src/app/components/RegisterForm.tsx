@@ -18,7 +18,7 @@ const RegisterForm = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/api/register', {
+      const response = await fetch('http://localhost:3000/api/users/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -32,6 +32,8 @@ const RegisterForm = () => {
 
       if (response.ok) {
         const data = await response.json();
+        console.log(data);
+        alert("Registration successful.");
       } else {
         throw new Error('Network response was not ok.');
       }
