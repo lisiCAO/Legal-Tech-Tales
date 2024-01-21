@@ -2,6 +2,20 @@ const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken'); 
 
+exports.getMe = async (req, res) => {
+  try {
+    if (!user) {
+      return res.status(404).send('The user does not exist.');
+    }
+    const userId = req.user.userId;
+    const user = await User.findById(userId).select('-password');
+    return res.status(200).send({ user: user });
+  }
+  catch (error) {
+    res.status(500).send('Error finding user');
+  }
+};
+
 exports.getUser = async (req, res) => {
   try {
     const userId = req.params.id;  
