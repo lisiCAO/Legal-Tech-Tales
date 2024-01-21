@@ -1,3 +1,4 @@
+'use client';
 import React, { useState } from 'react';
 
 const RegisterForm = () => {
@@ -11,7 +12,6 @@ const RegisterForm = () => {
 
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-    // 检查密码是否匹配
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords do not match.");
       return;
@@ -65,6 +65,7 @@ const RegisterForm = () => {
             Your email
           </label>
           <input
+            name="email" 
             id="email"
             type="email"
             value={formData.email}
@@ -77,6 +78,7 @@ const RegisterForm = () => {
             Password
           </label>
           <input
+            name="password" 
             id="password"
             type="password"
             value={formData.password}
@@ -85,10 +87,11 @@ const RegisterForm = () => {
           />
         </div>
         <div className="mb-6">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="passwordConfirm">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="confirmPassword">
             Password (repeat)
           </label>
           <input
+            name="confirmPassword"
             id="confirmPassword"
             type="password"
             value={formData.confirmPassword}
