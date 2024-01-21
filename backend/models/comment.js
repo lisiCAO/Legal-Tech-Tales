@@ -7,8 +7,7 @@ const commentSchema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: [5, 'Comment must be at least 5 characters long.']
-  },
-  creationTime: { type: Date, default: Date.now }
+  }
 }, { timestamps: true });
 
 const Comment = mongoose.model('Comment', commentSchema);
