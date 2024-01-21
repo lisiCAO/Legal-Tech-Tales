@@ -14,13 +14,12 @@ const app = express();
 // Add your express routes and middleware here
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors(),(req,res,next)=>{
-    res.setHeader('Access-Control-Allow-Origin','*');
-    res.setHeader('Access-Control-Allow-Methods','GET,POST,PUT,PATCH,DELETE');
-    res.setHeader('Access-Control-Allow-Headers','Content-Type,Authorization');
-    res.setHeader('Access-Control-Allow-Credentials',true);
-    next();
-});
+app.use(cors({
+    origin: 'http://localhost:8080', 
+    methods: 'GET,POST,PUT,PATCH,DELETE',
+    allowedHeaders: 'Content-Type,Authorization',
+    credentials: true
+}));
 
 app.use('/api/users', userRoutes);
 app.use('/api/articles', articleRoutes);
