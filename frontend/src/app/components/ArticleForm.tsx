@@ -1,5 +1,5 @@
-// components/ArticleForm.tsx
 'use client';
+// components/ArticleForm.tsx
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 

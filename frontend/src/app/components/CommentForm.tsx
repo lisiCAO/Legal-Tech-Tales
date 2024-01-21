@@ -1,6 +1,6 @@
 // components/CommentForm.tsx
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation'; // 正确的导入
+import { useRouter } from 'next/navigation'; 
 
 const CommentForm = ({ articleId }: { articleId: string }) => {
   const [comment, setComment] = useState('');
@@ -8,11 +8,8 @@ const CommentForm = ({ articleId }: { articleId: string }) => {
 
   const handleSubmit = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
-    // 这里应该有一些前端验证
-
-    // 发送请求到后端API添加评论
     try {
-      const response = await fetch(`/api/articles/${articleId}/comments`, {
+      const response = await fetch(`http://localhost:3000/api/comments`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -21,10 +18,8 @@ const CommentForm = ({ articleId }: { articleId: string }) => {
       });
 
       if (response.ok) {
-        // 评论添加成功，可以刷新页面或者动态添加到评论列表
-        router.replace(router.asPath); // 使用 replace 方法来刷新页面
+        router.push(`/articles/${articleId}`);
       } else {
-        // 处理错误，可能是显示一个错误消息
         console.error('Failed to post the comment.');
       }
     } catch (error) {
@@ -37,7 +32,6 @@ const CommentForm = ({ articleId }: { articleId: string }) => {
       <textarea
         value={comment}
         onChange={(e) => setComment(e.target.value)}
-        className="..."
         required
       />
       <button type="submit" className="...">
