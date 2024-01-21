@@ -2,6 +2,7 @@
 'use client';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const LoginForm = () => {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
@@ -65,6 +66,7 @@ const LoginForm = () => {
             required
           />
         </div>
+
         <div className="flex items-center justify-between">
           <button
             type="submit"
@@ -72,6 +74,11 @@ const LoginForm = () => {
           >
             Login
           </button>
+        </div>
+        <div className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" >
+            <Link  href={"/register"}>
+                No account? Register here.
+            </Link>
         </div>
       </form>
     </div>
