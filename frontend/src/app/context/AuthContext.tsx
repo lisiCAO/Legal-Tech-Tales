@@ -15,7 +15,9 @@ const AuthContext = createContext<AuthContextType | null>(null);
 export const useAuth = () => useContext(AuthContext);
 
 // Provider component that wraps your app and makes the auth object available to any child component that calls useAuth().
-export const AuthProvider: React.FC = ({ children }: React.PropsWithChildren<{}>) => {
+
+export const AuthProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
+  
   const [userName, setUserName] = useState<string | null>(null);
   
   // Dummy log in/out functionality
