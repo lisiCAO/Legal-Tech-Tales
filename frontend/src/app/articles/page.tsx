@@ -8,7 +8,11 @@ const HomePage: React.FC = () => {
       <div className="container mx-auto px-4">
         <h1 className="text-3xl font-bold my-6">Welcome to my blog, read on!</h1>
         {<ArticleList />}
-        <Link href='/add' className='text-3xl font-bold my-6'> Create your Article</Link>
+        <div className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" >
+            <Link  href={"/articles/add"}>
+                Create your Article
+            </Link>
+        </div>
       </div>
   );
 };
