@@ -29,7 +29,7 @@ const ArticleView = ({ slug }: { slug: string }) => {
       const articleRes = await fetch(`http://localhost:3000/api/articles/${slug}`);
       const article = await articleRes.json();
       setArticle(article);
-      const commentsRes = await fetch(`http://localhost:3000/api/comments/${article._id}`);
+      const commentsRes = await fetch(`http://localhost:3000/api/comments/${article._id}`, { credentials: 'include' });
       const comments = await commentsRes.json();
       setComments(comments);
     };

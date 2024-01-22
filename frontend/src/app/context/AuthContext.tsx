@@ -24,11 +24,12 @@ export const AuthProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(credentials),
-        credentials: 'include', 
+        credentials: 'include',
       });      
-      const name = await response.json();
-      setUserName(name);
+      const data = await response.json();
+      setUserName(data.name);
       setisLoggedIn(true);
+      router.push('/articles');
     } catch (error) {
       console.error('Login error:', error);
     }
