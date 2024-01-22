@@ -14,16 +14,26 @@ interface Article {
 
 const ArticleList = () => {
     const [articles, setArticles] = useState<Article[]>([]); 
-
+    const [error, setError] =useState('');
     useEffect(() => {
         const fetchArticles = async () => {
-            const res = await fetch('http://localhost:3000/api/articles');
+            try{
+                const res = await fetch('http://localhost:3000/api/articles');
+            if(!res.ok) {
+                throw new Error('Server responded with an error!');
+            }
             const data = await res.json();
             setArticles(data);
+            } catch (error:any) {
+                setError(error.message);
+            }
         };
 
         fetchArticles();
     }, []);
+    if(error) {
+        return <div className="text-red-600">{error}</div>
+    }
 
     return (
         <div>

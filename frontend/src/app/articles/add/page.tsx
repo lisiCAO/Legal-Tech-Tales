@@ -1,6 +1,5 @@
 // pages/articles/add.tsx
 import React from 'react';
-import RootLayout from '../../layout';
 import ArticleForm from '../../components/ArticleForm';
 
 const AddArticlePage = () => {
