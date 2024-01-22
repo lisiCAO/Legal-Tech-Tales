@@ -24,7 +24,9 @@ const ArticleView = ({ slug }: { slug: string }) => {
   const [authorName, setAuthorName] = useState('');
   const [article, setArticle] = useState<Article | null>(null);
   const [comments, setComments] = useState<Comment[]>([]);
-
+  if(!article) {
+    return <div>Loading...</div>
+  }
   useEffect(() => {
     const fetchArticle = async () => {
       const articleRes = await fetch(`http://localhost:3000/api/articles/${slug}`);
@@ -55,8 +57,8 @@ const ArticleView = ({ slug }: { slug: string }) => {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold my-6">{article.title}</h1>
-      <p className="mb-2">Posted by {authorName} on {article.createdAt}</p>
+      <h1 className="text-3xl font-bold my-6 text-custom-darkorange">{article.title}</h1>
+      <p className="mb-2 text-custom-green">Posted by {authorName} on {article.createdAt}</p>
       <article className="mb-6">{article.body}</article>
       <section className="mb-6">
         <CommentForm articleId={article._id} />
