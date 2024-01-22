@@ -16,7 +16,7 @@ LegalTechTales is a full-stack web application designed for legal technology sol
 
 1. **Clone the Repository**
    ```bash
-   git clone [Repository URL]
+   git clone [https://github.com/lisiCAO/Legal-Tech-Tales]
    cd legaltechtale
    ```
 
