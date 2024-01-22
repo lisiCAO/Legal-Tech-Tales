@@ -14,7 +14,8 @@ interface Article {
 }
 
 interface Comment {
-  authorId: string;
+  name: string;
+  authorId: {_id: string, name: string};
   body: string;
   createdAt: string;
 }
@@ -29,7 +30,7 @@ const ArticleView = ({ slug }: { slug: string }) => {
       const articleRes = await fetch(`http://localhost:3000/api/articles/${slug}`);
       const article = await articleRes.json();
       setArticle(article);
-      const commentsRes = await fetch(`http://localhost:3000/api/comments/${article._id}`);
+      const commentsRes = await fetch(`http://localhost:3000/api/comments/${article._id}`, { credentials: 'include' });
       const comments = await commentsRes.json();
       setComments(comments);
     };
@@ -58,14 +59,13 @@ const ArticleView = ({ slug }: { slug: string }) => {
       <p className="mb-2">Posted by {authorName} on {article.createdAt}</p>
       <article className="mb-6">{article.body}</article>
       <section className="mb-6">
-        <h2 className="text-xl font-bold">My comment:</h2>
         <CommentForm articleId={article._id} />
       </section>
       <section>
         <h2 className="text-xl font-bold">Previous comments:</h2>
         {comments.map((comment, _id) => (
           <div key={_id} className="mb-4">
-            <div className="font-semibold">{comment.authorId}</div> {/* Ideally, you would replace authorId with author's name */}
+            <div className="font-semibold">{comment.authorId.name}</div> {/* Ideally, you would replace authorId with author's name */}
             <p>{comment.body}</p>
             <time className="text-sm text-gray-600">{new Date(comment.createdAt).toLocaleDateString()}</time>
           </div>

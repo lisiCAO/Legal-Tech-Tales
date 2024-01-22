@@ -1,32 +1,52 @@
-// context/AuthContext.tsx
-import React, { createContext, useContext, useState } from 'react';
-
-// Define the shape of your context data
+'use client'
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 interface AuthContextType {
   userName: string | null;
   isLoggedIn: boolean;
   logOut: () => void;
+  login: (credentials: { email: string; password: string }) => Promise<void>;
 }
 
-// Create the context with a default value
 const AuthContext = createContext<AuthContextType | null>(null);
 
-// Hook to use the auth context
 export const useAuth = () => useContext(AuthContext);
-
-// Provider component that wraps your app and makes the auth object available to any child component that calls useAuth().
-export const AuthProvider: React.FC = ({ children }: React.PropsWithChildren<{}>) => {
+export const AuthProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
+  const router = useRouter();
   const [userName, setUserName] = useState<string | null>(null);
+  const [isLoggedIn, setisLoggedIn] = useState<boolean>(false);
+
+  const login = async (credentials: { email: string; password: string }) => {
+    try {
+      const response = await fetch('http://localhost:3000/api/users/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(credentials),
+        credentials: 'include',
+      });      
+      const data = await response.json();
+      setUserName(data.name);
+      setisLoggedIn(true);
+      router.push('/articles');
+    } catch (error) {
+      console.error('Login error:', error);
+    }
+  };
   
   // Dummy log in/out functionality
   const logOut = async () => {
-    await fetch('http://localhost:3000/api/users/logout', { method: 'POST' });
+    await fetch('http://localhost:3000/api/users/logout', { method: 'POST', credentials: 'include' });
     setUserName(null);
+    setisLoggedIn(false);
+    router.push('/articles');
   };
 
   const value = {
     userName,
-    isLoggedIn: !!userName,
+    isLoggedIn,
+    login,
     logOut,
   };
 

@@ -1,14 +1,13 @@
 // app/articles/[id]/page.tsx
-import React, { useState, useEffect } from 'react';  
-import Layout from '../../layout';
+import React from 'react';  
 import ArticleView from '../../components/ArticleView';
 
 const ArticlePage = ({ params }: { params: { slug: string } }) => {
 
   return (
-    <Layout>
-      {<ArticleView slug={params.slug} />}
-    </Layout>
+      <div className="container mx-auto px-4">
+      <ArticleView slug={params.slug} />
+      </div>
   );
 };
 

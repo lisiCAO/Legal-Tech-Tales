@@ -2,17 +2,17 @@ const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken'); 
 
-exports.getMe = async (req, res) => {
+exports.getMe = async (req, res, next) => {
   try {
+    const userId = req.user.userId;
+    const user = await User.findById(userId).select('-password');
     if (!user) {
       return res.status(404).send('The user does not exist.');
     }
-    const userId = req.user.userId;
-    const user = await User.findById(userId).select('-password');
     return res.status(200).send({ user: user });
   }
   catch (error) {
-    res.status(500).send('Error finding user');
+    next(error);
   }
 };
 
@@ -33,7 +33,7 @@ exports.register = async (req, res) => {
   try {
     const existingUser = await User.findOne({ email: req.body.email });
     if (existingUser) {
-      return res.status(400).send('Email already exists');
+      return res.status(400).json({ error: 'Email already exists' });
     }
 
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -57,7 +57,7 @@ exports.login = async (req, res) => {
     if (user && await bcrypt.compare(req.body.password, user.password)) {
       const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
       res.cookie('token', token, { httpOnly: true, maxAge: 3600000 }); // one hour
-      res.send({ token });
+      res.send({ name: user.name }); // Fix: Pass an object with the property 'name'
     } else {
       res.status(400).send('Invalid credentials');
     }

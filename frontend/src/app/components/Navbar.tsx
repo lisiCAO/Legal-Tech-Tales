@@ -1,7 +1,8 @@
+'use client'
 // components/NavBar.tsx
 import React from 'react';
 import Link from 'next/link';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from './../context/AuthContext';
 
 const NavBar: React.FC = () => {
   const auth = useAuth();
@@ -9,8 +10,7 @@ const NavBar: React.FC = () => {
   return (
     <nav className="bg-gray-800 text-white p-4">
       <div className="container mx-auto flex justify-between items-center">
-        <Link href="/">
-          <a className="text-xl font-bold">My Blog</a>
+        <Link href="/articles" className="text-xl font-bold">My Blog
         </Link>
         <div>
           {auth?.isLoggedIn ? (
@@ -24,10 +24,8 @@ const NavBar: React.FC = () => {
               </button>
             </>
           ) : (
-            <Link href="/login">
-              <a className="text-white bg-blue-500 hover:bg-blue-700 px-3 py-2 rounded">
+            <Link href="/login" className="text-white bg-blue-500 hover:bg-blue-700 px-3 py-2 rounded">
                 Login
-              </a>
             </Link>
           )}
         </div>
