@@ -5,7 +5,7 @@ export default function Home() {
     <div className="flex min-h-screen flex-col items-center justify-center p-6 bg-custom-cream">
       <div className="w-full max-w-[960px] mx-auto flex justify-center">
         <Image
-          src="/path/to/image.jpg"
+          src="/banner.png"
           alt="description"
           width={500}
           height={300}

@@ -46,7 +46,7 @@ const ArticleList = () => {
                         Posted by {article.authorName} on{' '}
                         {new Date(article.createdAt).toLocaleDateString()}
                     </p>
-                    <p>{article.body.substring(0, 200)}...</p>
+                    <p className='text-custom-pink'>{article.body.substring(0, 200)}...</p>
                 </article>
             ))}
         </div>

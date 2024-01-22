@@ -21,13 +21,13 @@ export default function RootLayout({
     <html lang="en">
       <AuthProvider>
         <body className={inter.className}>
-          <div className={inter.className + " flex flex-col min-h-screen"}>
+          <div className="flex flex-col min-h-screen">
             <NavBar />
             <main className="flex-grow">
               {children}
             </main>
-            <footer className="flex justify-center items-center h-24 bg-gray-200">
-              <p className="text-gray-600">© 2024 - My Blog</p>
+            <footer className="flex justify-center items-center h-24 bg-custom-gray">
+              <p className="text-custom-text">© 2024 - My Blog</p>
             </footer>
           </div>
         </body>

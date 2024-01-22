@@ -8,7 +8,7 @@ const NavBar: React.FC = () => {
   const auth = useAuth();
 
   return (
-    <nav className="bg-gray-800 text-white p-4">
+    <nav className="bg-custom-nav text-white p-4">
       <div className="container mx-auto flex justify-between items-center">
         <Link href="/articles" className="text-xl font-bold">My Blog
         </Link>
