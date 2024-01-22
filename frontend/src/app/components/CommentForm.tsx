@@ -9,12 +9,14 @@ const CommentForm = ({ articleId }: { articleId: string }) => {
   const handleSubmit = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
     try {
+      const commentData = {
+        body: comment,
+        articleId: articleId
+      };
+
       const response = await fetch(`http://localhost:3000/api/comments`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ comment }),
+        body: JSON.stringify({ commentData }),
         credentials: 'include'
       });
 
