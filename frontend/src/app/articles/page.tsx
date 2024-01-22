@@ -6,9 +6,9 @@ import Link from 'next/link';
 const HomePage: React.FC = () => {
   return (
       <div className="container mx-auto px-4">
-        <h1 className="text-3xl font-bold my-6">Welcome to my blog, read on!</h1>
+        <h1 className="text-3xl font-bold my-6 text-custom-darkorange">Welcome to my blog, read on!</h1>
         {<ArticleList />}
-        <div className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" >
+        <div className="inline-block align-baseline font-bold text-sm text-custom-green hover:text-custom-orange cursor-pointer" >
             <Link  href={"/articles/add"}>
                 Create your Article
             </Link>

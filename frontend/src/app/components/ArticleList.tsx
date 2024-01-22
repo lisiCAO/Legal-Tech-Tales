@@ -9,11 +9,11 @@ interface Article {
     body: string;
     slug: string;
     authorName: string;
-    createdAt: string; // Fix the type of createdAt to string
+    createdAt: string; 
 }
 
 const ArticleList = () => {
-    const [articles, setArticles] = useState<Article[]>([]); // Specify the type of articles as Article[]
+    const [articles, setArticles] = useState<Article[]>([]); 
 
     useEffect(() => {
         const fetchArticles = async () => {
@@ -28,11 +28,11 @@ const ArticleList = () => {
     return (
         <div>
             {articles.map((article) => (
-                <article key={article._id} className="mb-6">
+                <article key={article._id} className="mb-6 p-4 bg-custom-cream rounded-lg shadow">
                     <Link href={`/articles/${article.slug}`}>
-                        <p className="text-xl font-bold">{article.title}</p>
+                        <h2 className="text-xl font-bold text-custom-darkorange cursor-pointer">{article.title}</h2>
                     </Link>
-                    <p>
+                    <p className="text-custom-green">
                         Posted by {article.authorName} on{' '}
                         {new Date(article.createdAt).toLocaleDateString()}
                     </p>
