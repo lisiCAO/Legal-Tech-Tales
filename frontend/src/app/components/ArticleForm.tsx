@@ -16,7 +16,7 @@ const ArticleForm = () => {
     event.preventDefault();
 
     try {
-        const response = await fetch('http://localhost:3000/api/articles', {
+        const response = await fetch('http://localhost:3000/api/articles/add', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
