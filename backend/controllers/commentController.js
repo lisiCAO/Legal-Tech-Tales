@@ -21,7 +21,7 @@ exports.addComment = async (req, res) => {
 exports.getComments = async (req, res) => {
   try {
     const articleId = req.params.articleId;
-    const comments = await Comment.find({ articleId: articleId });
+    const comments = await Comment.find({ articleId: articleId }).populate('authorId', 'name');
     res.send(comments);
   } catch (error) {
     res.status(500).send('Error retrieving comments');
