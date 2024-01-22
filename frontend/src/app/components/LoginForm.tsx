@@ -19,10 +19,10 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <div className="min-h-screen flex items-center justify-center bg-custom-cream">
+      <form onSubmit={handleSubmit} className="shadow-md rounded px-8 pt-6 pb-8 mb-4 bg-white">
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+          <label className="block text-custom-darkorange text-sm font-bold mb-2" htmlFor="email">
             Email
           </label>
           <input
@@ -36,7 +36,7 @@ const LoginForm = () => {
           />
         </div>
         <div className="mb-6">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+          <label className="block text-custom-darkorange text-sm font-bold mb-2" htmlFor="password">
             Password
           </label>
           <input
@@ -53,15 +53,17 @@ const LoginForm = () => {
         <div className="flex items-center justify-between">
           <button
             type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="bg-custom-pink hover:bg-custom-orange text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300"
           >
             Login
           </button>
         </div>
-        <div className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" >
-            <Link  href={"/register"}>
-                No account? Register here.
-            </Link>
+        <div className="mt-4">
+          <Link href={"/register"}>
+            <span className="inline-block align-baseline font-bold text-sm text-custom-green hover:text-custom-darkorange cursor-pointer">
+              No account? Register here.
+            </span>
+          </Link>
         </div>
       </form>
     </div>

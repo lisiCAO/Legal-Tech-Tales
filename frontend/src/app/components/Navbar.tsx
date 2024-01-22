@@ -25,7 +25,7 @@ const NavBar: React.FC = () => {
             </>
           ) : (
             <Link href="/login" className="text-white bg-blue-500 hover:bg-blue-700 px-3 py-2 rounded">
-                Login
+              Login
             </Link>
           )}
         </div>
