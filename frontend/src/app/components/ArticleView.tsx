@@ -58,7 +58,6 @@ const ArticleView = ({ slug }: { slug: string }) => {
       <p className="mb-2">Posted by {authorName} on {article.createdAt}</p>
       <article className="mb-6">{article.body}</article>
       <section className="mb-6">
-        <h2 className="text-xl font-bold">My comment:</h2>
         <CommentForm articleId={article._id} />
       </section>
       <section>
