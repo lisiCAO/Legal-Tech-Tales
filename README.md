@@ -47,6 +47,7 @@ After the services are up and running:
 
 - The **frontend** is accessible at `http://localhost:8080`.
 - The **backend** API is accessible at `http://localhost:3000`.
+- [API endpoints documentation](https://documenter.getpostman.com/view/31315195/2s9YymHQc7) 
 
 ## Contributing
 
