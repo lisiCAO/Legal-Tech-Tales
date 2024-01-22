@@ -14,6 +14,7 @@ interface Article {
 }
 
 interface Comment {
+  _id: string;
   name: string;
   authorId: {_id: string, name: string};
   body: string;
@@ -24,9 +25,7 @@ const ArticleView = ({ slug }: { slug: string }) => {
   const [authorName, setAuthorName] = useState('');
   const [article, setArticle] = useState<Article | null>(null);
   const [comments, setComments] = useState<Comment[]>([]);
-  if(!article) {
-    return <div>Loading...</div>
-  }
+
   useEffect(() => {
     const fetchArticle = async () => {
       const articleRes = await fetch(`http://localhost:3000/api/articles/${slug}`);
@@ -42,17 +41,17 @@ const ArticleView = ({ slug }: { slug: string }) => {
   useEffect(() => {
     // Fetch author name
     const fetchAuthor = async () => {
-      if (article) {
+      if (article?.authorId) {
         const response = await fetch(`http://localhost:3000/api/users/${article.authorId}`);
         const data = await response.json();
         setAuthorName(data.name);
       }
     };
     fetchAuthor();
-  }, [article]);
+  }, [article?.authorId]);
 
-  if (!article) {
-    return null; // or render a loading state
+  if(!article) {
+    return <div>Loading...</div>
   }
 
   return (
@@ -65,8 +64,8 @@ const ArticleView = ({ slug }: { slug: string }) => {
       </section>
       <section>
         <h2 className="text-xl font-bold">Previous comments:</h2>
-        {comments.map((comment, _id) => (
-          <div key={_id} className="mb-4">
+        {comments.map((comment) => (
+          <div key={comment._id} className="mb-4">
             <div className="font-semibold">{comment.authorId.name}</div> {/* Ideally, you would replace authorId with author's name */}
             <p>{comment.body}</p>
             <time className="text-sm text-gray-600">{new Date(comment.createdAt).toLocaleDateString()}</time>
