@@ -39,6 +39,8 @@ export const AuthProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }
   const logOut = async () => {
     await fetch('http://localhost:3000/api/users/logout', { method: 'POST', credentials: 'include' });
     setUserName(null);
+    setisLoggedIn(false);
+    router.push('/articles');
   };
 
   const value = {
