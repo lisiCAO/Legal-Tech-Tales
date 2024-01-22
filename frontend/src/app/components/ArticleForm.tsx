@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 const ArticleForm = () => {
   const [article, setArticle] = useState({ title: '', body: '' });
   const router = useRouter();
+  const [error,setError] =useState('');
 
   const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
