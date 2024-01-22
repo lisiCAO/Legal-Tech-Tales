@@ -18,7 +18,13 @@ const RegisterForm = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/api/users/register', {
+      console.log('Sending data:', JSON.stringify({
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+      }));
+
+      const response = await fetch(`http://localhost:3000/api/users/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -27,15 +33,15 @@ const RegisterForm = () => {
           name: formData.name,
           email: formData.email,
           password: formData.password,
-        }),
+        })
       });
-
       if (response.ok) {
         const data = await response.json();
         console.log(data);
         alert("Registration successful.");
       } else {
-        throw new Error('Network response was not ok.');
+        const errorData = await response.json();
+        alert(errorData.error); 
       }
     } catch (error) {
       console.error('There was a problem with the fetch operation: ', error);

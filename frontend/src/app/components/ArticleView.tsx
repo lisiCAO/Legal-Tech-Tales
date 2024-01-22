@@ -15,7 +15,7 @@ interface Article {
 
 interface Comment {
   name: string;
-  authorId: string;
+  authorId: {_id: string, name: string};
   body: string;
   createdAt: string;
 }
@@ -65,7 +65,7 @@ const ArticleView = ({ slug }: { slug: string }) => {
         <h2 className="text-xl font-bold">Previous comments:</h2>
         {comments.map((comment, _id) => (
           <div key={_id} className="mb-4">
-            <div className="font-semibold">{comment.name}</div> {/* Ideally, you would replace authorId with author's name */}
+            <div className="font-semibold">{comment.authorId.name}</div> {/* Ideally, you would replace authorId with author's name */}
             <p>{comment.body}</p>
             <time className="text-sm text-gray-600">{new Date(comment.createdAt).toLocaleDateString()}</time>
           </div>

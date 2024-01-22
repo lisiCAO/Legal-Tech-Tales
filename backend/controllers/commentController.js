@@ -5,7 +5,7 @@ exports.addComment = async (req, res) => {
     const newComment = new Comment({
       body: req.body.body,
       articleId: req.body.articleId,
-      authorId: req.user._id
+      authorId: req.user.userId
     });
 
     const savedComment = await newComment.save();
