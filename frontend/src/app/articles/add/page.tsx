@@ -4,8 +4,8 @@ import ArticleForm from '../../components/ArticleForm';
 
 const AddArticlePage = () => {
     return (
-          <div className="container mx-auto p-4">
-            <h1 className="text-xl font-bold mb-4">Create new article</h1>
+      <div className="container mx-auto p-4">
+      <h1 className="text-2xl md:text-3xl font-bold my-6 text-custom-darkorange">Create new article</h1>
             <ArticleForm />
           </div>
       );
