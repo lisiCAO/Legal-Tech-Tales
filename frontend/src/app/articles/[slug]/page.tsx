@@ -5,7 +5,9 @@ import ArticleView from '../../components/ArticleView';
 const ArticlePage = ({ params }: { params: { slug: string } }) => {
 
   return (
+      <div className="container mx-auto px-4">
       <ArticleView slug={params.slug} />
+      </div>
   );
 };
 

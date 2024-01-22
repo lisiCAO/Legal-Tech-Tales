@@ -25,11 +25,7 @@ export const AuthProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }
         },
         body: JSON.stringify(credentials),
         credentials: 'include', 
-      });
-      if (!response.ok) {
-        throw new Error(`Login failed with status: ${response.status}`);
-      }
-      
+      });      
       const name = await response.json();
       setUserName(name);
       setisLoggedIn(true);

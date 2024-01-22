@@ -10,7 +10,7 @@ const NavBar: React.FC = () => {
   return (
     <nav className="bg-gray-800 text-white p-4">
       <div className="container mx-auto flex justify-between items-center">
-        <Link href="/" className="text-xl font-bold">My Blog
+        <Link href="/articles" className="text-xl font-bold">My Blog
         </Link>
         <div>
           {auth?.isLoggedIn ? (
