@@ -1,6 +1,6 @@
 // app/articles/[id]/page.tsx
 import React from 'react';  
-import ArticleView from '../../components/ArticleView';
+import ArticleView from './ArticleView';
 
 const ArticlePage = ({ params }: { params: { slug: string } }) => {
 

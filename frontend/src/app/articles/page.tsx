@@ -1,6 +1,6 @@
 // Purpose: Home page for the blog
 import React from 'react';
-import ArticleList from '../components/ArticleList';
+import ArticleList from './ArticleList';
 import Link from 'next/link';
 
 const HomePage: React.FC = () => {

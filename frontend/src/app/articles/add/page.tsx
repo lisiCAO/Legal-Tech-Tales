@@ -1,6 +1,6 @@
 // pages/articles/add.tsx
 import React from 'react';
-import ArticleForm from '../../components/ArticleForm';
+import ArticleForm from './ArticleForm';
 
 const AddArticlePage = () => {
     return (
