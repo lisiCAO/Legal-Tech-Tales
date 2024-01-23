@@ -16,6 +16,20 @@ export const AuthProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }
   const [userName, setUserName] = useState<string | null>(null);
   const [isLoggedIn, setisLoggedIn] = useState<boolean>(false);
 
+  // Check if user is logged in
+  useEffect(() => {
+    const checkLogin = async () => {
+      const response = await fetch('http://localhost:3000/api/users/me', { credentials: 'include' });
+      const data = await response.json();
+      if (data.user) {
+        const { name } = data.user;
+        setUserName(name);
+        setisLoggedIn(true);
+      }
+    };
+    checkLogin();
+  }, []);
+
   const login = async (credentials: { email: string; password: string }) => {
     try {
       const response = await fetch('http://localhost:3000/api/users/login', {
