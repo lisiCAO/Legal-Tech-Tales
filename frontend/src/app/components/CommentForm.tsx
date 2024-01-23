@@ -4,10 +4,12 @@ import { useRouter } from 'next/navigation';
 
 const CommentForm = ({ articleId }: { articleId: string }) => {
   const [comment, setComment] = useState('');
+  const [error, setError] = useState('');
   const router = useRouter();
 
   const handleSubmit = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
+    setError('');
     try {
       const commentData = {
         body: comment,
@@ -23,15 +25,16 @@ const CommentForm = ({ articleId }: { articleId: string }) => {
       if (response.ok) {
         router.push(`/articles/${articleId}`);
       } else {
-        console.error('Failed to post the comment.');
+        setError('Failed to post the comment.');
       }
     } catch (error) {
-      console.error('There was an error submitting the comment:', error);
+      setError('There was an error submitting the comment.');
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className="mb-6">
+      {error && <div className="text-red-600">{error}</div>}
       <label htmlFor="comment" className="text-xl font-bold">My Comment:</label>
       <textarea
         id="comment"

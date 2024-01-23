@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 const ArticleForm = () => {
   const [article, setArticle] = useState({ title: '', body: '' });
   const router = useRouter();
+  const [error,setError] =useState('');
 
   const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
@@ -14,7 +15,7 @@ const ArticleForm = () => {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
+    setError(''); 
     try {
         const response = await fetch('http://localhost:3000/api/articles/add', {
           method: 'POST',
@@ -29,15 +30,16 @@ const ArticleForm = () => {
             // redirect to articles list
           router.push('/articles');
         } else {
-          console.error('Failed to create the article.');
+          setError('Failed to create the article.'); 
         }
       } catch (error) {
-        console.error('There was an error submitting the form:', error);
+        setError('There was an error submitting the form.');
       }
   };
 
   return (
     <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    {error && <div className="text-red-600 mb-4">{error}</div>}
       <div className="mb-4">
         <label htmlFor="title" className="block text-gray-700 text-sm font-bold mb-2">
           Title

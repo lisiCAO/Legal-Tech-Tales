@@ -1,22 +1,22 @@
 'use client';
 import React, { useState } from 'react';
-
+import { useRouter } from 'next/navigation';
 const RegisterForm = () => {
-
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
     confirmPassword: ''
   });
-
+  const [error, setError] = useState('');
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match.");
+      setError("Passwords do not match.");
       return;
     }
-
+    setError(''); 
     try {
       console.log('Sending data:', JSON.stringify({
         name: formData.name,
@@ -38,10 +38,10 @@ const RegisterForm = () => {
       if (response.ok) {
         const data = await response.json();
         console.log(data);
-        alert("Registration successful.");
+        router.push('/login');
       } else {
         const errorData = await response.json();
-        alert(errorData.error); 
+        setError(errorData.error);
       }
     } catch (error) {
       console.error('There was a problem with the fetch operation: ', error);
@@ -53,8 +53,9 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="min-h-screen flex items-center justify-center bg-custom-cream">
       <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        {error && <div className="bg-custom-orange text-white p-2 rounded mb-4">{error}</div>}
       <div className="mb-6">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
             Desired username
@@ -110,7 +111,7 @@ const RegisterForm = () => {
         <div className="flex items-center justify-between">
           <button
             type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="bg-custom-pink hover:bg-custom-orange text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300"
           >
             Register
           </button>

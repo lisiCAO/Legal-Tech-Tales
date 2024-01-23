@@ -9,34 +9,44 @@ interface Article {
     body: string;
     slug: string;
     authorName: string;
-    createdAt: string; // Fix the type of createdAt to string
+    createdAt: string; 
 }
 
 const ArticleList = () => {
-    const [articles, setArticles] = useState<Article[]>([]); // Specify the type of articles as Article[]
-
+    const [articles, setArticles] = useState<Article[]>([]); 
+    const [error, setError] =useState('');
     useEffect(() => {
         const fetchArticles = async () => {
-            const res = await fetch('http://localhost:3000/api/articles');
+            try{
+                const res = await fetch('http://localhost:3000/api/articles');
+            if(!res.ok) {
+                throw new Error('Server responded with an error!');
+            }
             const data = await res.json();
             setArticles(data);
+            } catch (error:any) {
+                setError(error.message);
+            }
         };
 
         fetchArticles();
     }, []);
+    if(error) {
+        return <div className="text-red-600">{error}</div>
+    }
 
     return (
         <div>
             {articles.map((article) => (
-                <article key={article._id} className="mb-6">
+                <article key={article._id} className="mb-6 p-4 bg-custom-cream rounded-lg shadow">
                     <Link href={`/articles/${article.slug}`}>
-                        <p className="text-xl font-bold">{article.title}</p>
+                        <h2 className="text-xl font-bold text-custom-darkorange cursor-pointer">{article.title}</h2>
                     </Link>
-                    <p>
+                    <p className="text-custom-green">
                         Posted by {article.authorName} on{' '}
                         {new Date(article.createdAt).toLocaleDateString()}
                     </p>
-                    <p>{article.body.substring(0, 200)}...</p>
+                    <p className='text-custom-pink'>{article.body.substring(0, 200)}...</p>
                 </article>
             ))}
         </div>
