@@ -10,6 +10,25 @@ const ArticleForm = () => {
 
   const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
+    if (name === 'title' && value.trim() === '') {
+      setError('Title cannot be empty');
+      return;
+    }
+
+    if (name === 'title' && value.length < 10) {
+      setError('Title must be at least 10 characters long');
+      return;
+    }
+    
+    if (name === 'body' && value.trim() === '') {
+      setError('Content cannot be empty');
+      return;
+    }
+
+    if (name === 'body' && value.length < 50) {
+      setError('Content must be at least 50 characters long');
+      return;
+    }
     setArticle((prev) => ({ ...prev, [name]: value }));
   };
 

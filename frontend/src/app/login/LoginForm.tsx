@@ -12,9 +12,19 @@ const LoginForm = () => {
     e.preventDefault();
     auth?.login(credentials);
   };
+  const [error, setError] = useState('');
 
   const handleChange = (e: { target: { name: any; value: any; }; }) => {
     const { name, value } = e.target;
+    if (name === 'email' && !/\S+@\S+\.\S+/.test(value)) {
+      setError('Please enter a valid email address.');
+      return;
+    }
+    
+    if (name === 'password' && value.length < 6) {
+      setError('Password must be at least 6 characters long.');
+      return;
+    }
     setCredentials({ ...credentials, [name]: value });
   };
 
