@@ -21,6 +21,7 @@ interface Comment {
   createdAt: string;
 }
 
+
 const ArticleView = ({ slug }: { slug: string }) => {
   const [authorName, setAuthorName] = useState('');
   const [article, setArticle] = useState<Article | null>(null);
@@ -60,7 +61,7 @@ const ArticleView = ({ slug }: { slug: string }) => {
       <p className="mb-2 text-custom-green">Posted by {authorName} on {article.createdAt}</p>
       <article className="mb-6">{article.body}</article>
       <section className="mb-6">
-        <CommentForm articleId={article._id} />
+        <CommentForm articleId={article._id} slug={slug} />
       </section>
       <section>
         <h2 className="text-xl font-bold">Previous comments:</h2>

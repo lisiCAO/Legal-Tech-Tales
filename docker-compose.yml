@@ -12,7 +12,7 @@ services:
     environment:
       - MONGO_URI=mongodb://legaltechtales-db:27017/legaltechtale
     volumes:
-      - /app/node_modules
+      - ./backend:/app
 
   legaltechtales-frontend:
     build: 
@@ -22,7 +22,7 @@ services:
     ports:
       - "8080:3000"
     volumes:
-      - /app/node_modules
+      - ./frontend:/app
 
   legaltechtales-db:
     image: mongo

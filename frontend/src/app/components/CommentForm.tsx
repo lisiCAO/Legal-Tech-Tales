@@ -1,8 +1,11 @@
 // components/CommentForm.tsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation'; 
-
-const CommentForm = ({ articleId }: { articleId: string }) => {
+interface CommentFormProps {
+  articleId: string;
+  slug: string; // 添加这一行
+}
+const CommentForm: React.FC<CommentFormProps> = ({ articleId, slug }) => {
   const [comment, setComment] = useState('');
   const [error, setError] = useState('');
   const router = useRouter();
@@ -10,27 +13,35 @@ const CommentForm = ({ articleId }: { articleId: string }) => {
   const handleSubmit = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
     setError('');
-    try {
-      const commentData = {
-        body: comment,
-        articleId: articleId
-      };
 
+    try {
       const response = await fetch(`http://localhost:3000/api/comments`, {
         method: 'POST',
-        body: JSON.stringify({ commentData }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({   body: comment,
+          articleId: articleId }),
         credentials: 'include'
       });
-
-      if (response.ok) {
-        router.push(`/articles/${articleId}`);
-      } else {
-        setError('Failed to post the comment.');
+      if( response.status === 401 ) {
+        router.push('/login');
+        return;
+      } 
+      if (!response.ok) {
+        throw new Error(await response.text());
       }
+      
+      setComment('');
+      
     } catch (error) {
-      setError('There was an error submitting the comment.');
+      setError((error as Error).message);
     }
   };
+
+  useEffect(() => {
+    setError('');
+  }
+  , [comment]);
+  
 
   return (
     <form onSubmit={handleSubmit} className="mb-6">
