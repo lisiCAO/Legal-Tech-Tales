@@ -55,12 +55,11 @@ const ArticleForm = () => {
         setError('There was an error submitting the form.');
       }
   };
-
   return (
-    <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-    {error && <div className="text-red-600 mb-4">{error}</div>}
+    <form onSubmit={handleSubmit} className="bg-card shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      {error && <div className="text-red-600 mb-4">{error}</div>}
       <div className="mb-4">
-        <label htmlFor="title" className="block text-gray-700 text-sm font-bold mb-2">
+        <label htmlFor="title" className="block text-foreground text-sm font-bold mb-2">
           Title
         </label>
         <input
@@ -69,13 +68,13 @@ const ArticleForm = () => {
           type="text"
           value={article.title}
           onChange={handleChange}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow appearance-none border-custom rounded w-full py-2 px-3 text-foreground leading-tight focus:outline-none focus:shadow-outline"
           required
           minLength={10}
         />
       </div>
       <div className="mb-6">
-        <label htmlFor="body" className="block text-gray-700 text-sm font-bold mb-2">
+        <label htmlFor="body" className="block text-foreground text-sm font-bold mb-2">
           Content
         </label>
         <textarea
@@ -84,7 +83,7 @@ const ArticleForm = () => {
           rows={4}
           value={article.body}
           onChange={handleChange}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow appearance-none border-custom rounded w-full py-2 px-3 text-foreground mb-3 leading-tight focus:outline-none focus:shadow-outline"
           required
           minLength={50}
         />
@@ -92,7 +91,7 @@ const ArticleForm = () => {
       <div className="flex items-center justify-between">
         <button
           type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          className="bg-custom-button hover:bg-custom-button-hover text-button-text font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
           Create
         </button>

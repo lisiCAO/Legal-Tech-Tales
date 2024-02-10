@@ -1,7 +1,4 @@
-'use client';
-// components/ArticleView.tsx
 import React, { useState, useEffect } from 'react';
-
 import CommentForm from './CommentForm';
 
 interface Article {
@@ -16,11 +13,10 @@ interface Article {
 interface Comment {
   _id: string;
   name: string;
-  authorId: {_id: string, name: string};
+  authorId: { _id: string, name: string };
   body: string;
   createdAt: string;
 }
-
 
 const ArticleView = ({ slug }: { slug: string }) => {
   const [authorName, setAuthorName] = useState('');
@@ -51,25 +47,25 @@ const ArticleView = ({ slug }: { slug: string }) => {
     fetchAuthor();
   }, [article?.authorId]);
 
-  if(!article) {
-    return <div>Loading...</div>
+  if (!article) {
+    return <div>Loading...</div>;
   }
 
   return (
     <div>
-      <h1 className="text-3xl font-bold my-6 text-custom-darkorange">{article.title}</h1>
-      <p className="mb-2 text-custom-green">Posted by {authorName} on {article.createdAt}</p>
-      <article className="mb-6">{article.body}</article>
+      <h1 className="text-3xl font-bold my-6 text-foreground">{article.title}</h1>
+      <p className="mb-2 text-secondary">Posted by {authorName} on {new Date(article.createdAt).toLocaleDateString()}</p>
+      <article className="mb-6 bg-card rounded-lg shadow p-4">{article.body}</article>
       <section className="mb-6">
         <CommentForm articleId={article._id} slug={slug} />
       </section>
       <section>
-        <h2 className="text-xl font-bold">Previous comments:</h2>
+        <h2 className="text-xl font-bold text-foreground">Previous comments:</h2>
         {comments.map((comment) => (
-          <div key={comment._id} className="mb-4">
-            <div className="font-semibold">{comment.authorId.name}</div> {/* Ideally, you would replace authorId with author's name */}
-            <p>{comment.body}</p>
-            <time className="text-sm text-gray-600">{new Date(comment.createdAt).toLocaleDateString()}</time>
+          <div key={comment._id} className="mb-4 bg-card rounded-lg shadow p-4">
+            <div className="font-semibold text-foreground">{comment.authorId.name}</div>
+            <p className="text-secondary">{comment.body}</p>
+            <time className="text-sm text-secondary">{new Date(comment.createdAt).toLocaleDateString()}</time>
           </div>
         ))}
       </section>

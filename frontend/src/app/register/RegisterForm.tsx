@@ -64,11 +64,11 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-custom-cream">
-      <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <div className="min-h-screen flex items-center justify-center bg-card">
+      <form onSubmit={handleSubmit} className="shadow-md rounded px-8 pt-6 pb-8 mb-4 bg-card">
         {error && <div className="bg-custom-orange text-white p-2 rounded mb-4">{error}</div>}
-      <div className="mb-6">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
+        <div className="mb-6">
+          <label className="block text-foreground text-sm font-bold mb-2" htmlFor="name">
             Desired username
           </label>
           <input
@@ -77,11 +77,11 @@ const RegisterForm = () => {
             type="text"
             value={formData.name}
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border-custom rounded w-full py-2 px-3 text-foreground leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+          <label className="block text-foreground text-sm font-bold mb-2" htmlFor="email">
             Your email
           </label>
           <input
@@ -90,11 +90,11 @@ const RegisterForm = () => {
             type="email"
             value={formData.email}
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border-custom rounded w-full py-2 px-3 text-foreground leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
         <div className="mb-6">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+          <label className="block text-foreground text-sm font-bold mb-2" htmlFor="password">
             Password
           </label>
           <input
@@ -103,11 +103,11 @@ const RegisterForm = () => {
             type="password"
             value={formData.password}
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border-custom rounded w-full py-2 px-3 text-foreground leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
         <div className="mb-6">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="confirmPassword">
+          <label className="block text-foreground text-sm font-bold mb-2" htmlFor="confirmPassword">
             Password (repeat)
           </label>
           <input
@@ -116,13 +116,13 @@ const RegisterForm = () => {
             type="password"
             value={formData.confirmPassword}
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border-custom rounded w-full py-2 px-3 text-foreground leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
         <div className="flex items-center justify-between">
           <button
             type="submit"
-            className="bg-custom-pink hover:bg-custom-orange text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300"
+            className="bg-custom-button hover:bg-custom-button-hover text-button-text font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300"
           >
             Register
           </button>

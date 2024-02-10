@@ -16,18 +16,17 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <html lang="en">
       <AuthProvider>
-        <body className={inter.className}>
+        <body>
           <div className="flex flex-col min-h-screen">
             <NavBar />
             <main className="flex-grow">
               {children}
             </main>
-            <footer className="flex justify-center items-center h-24 bg-custom-gray">
-              <p className="text-custom-text">© 2024 - My Blog</p>
+            <footer className="flex justify-center items-center h-24 bg-footer text-foreground">
+              <p>© 2024 - My Blog</p>
             </footer>
           </div>
         </body>

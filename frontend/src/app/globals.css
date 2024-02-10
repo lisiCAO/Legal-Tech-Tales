@@ -2,32 +2,90 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Light mode variables */
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --background-color: #FFF8EE; 
+  --foreground-color: #000000;
+  --border-color: #E2E8F0; 
+  --link-color: #1a0dab;
+  --button-bg: #F2E38C;
+  --button-text: #000000; 
+  --header-bg: #FFF8EE; 
+  --footer-bg: #FFF8EE; 
+  --card-bg: #FFFFFF; 
+  --card-shadow: rgba(0, 0, 0, 0.1); 
+  --card-bg: #FFFFFF; 
+  --text-color-secondary: #555555; 
+  --link-color: #1a0dab; 
+  --link-hover-color: #4e9af7;
+  
+  --custom-pink: #F28D9B;
+  --custom-cream: #FFF8EE;
+  --custom-green: #95F4A1;
+  --custom-orange: #F2E38C;
+  --custom-darkorange: #F28A44;
+  --custom-button: #4e9af7; 
+  --custom-button-hover: #3b82f6; 
 }
 
+/* Dark mode variables */
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --background-color: #2A2A2A;
+    --foreground-color: #FFFFFF;
+    --border-color: #4A5568;
+    --link-color: #4e9af7;
+    --button-bg: #B59B5B;
+    --button-text: #FFFFFF;
+    --header-bg: #333333;
+    --footer-bg: #333333;
+    --card-bg: #444444;
+    --card-shadow: rgba(255, 255, 255, 0.1);
+
+    --custom-pink: #D76D77;
+    --custom-cream: #333333;
+    --custom-green: #669966;
+    --custom-orange: #B59B5B;
+    --custom-darkorange: #C75B12;
+    --custom-button: #639cd9; 
+    --custom-button-hover: #528bc9; 
+    --card-bg: #333333; 
+    --text-color-secondary: #cccccc; 
+    --link-color: #4e9af7;
+    --link-hover-color: #3b82f6; 
   }
 }
 
+/* Base styles */
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: var(--background-color);
+  color: var(--foreground-color);
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+a {
+  color: var(--link-color);
 }
+
+/* Utility classes */
+.border-custom {
+  border-color: var(--border-color);
+}
+
+.bg-button {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+}
+
+.bg-header {
+  background-color: var(--header-bg);
+}
+
+.bg-footer {
+  background-color: var(--footer-bg);
+}
+
+.card {
+  background-color: var(--card-bg);
+  box-shadow: 0 2px 4px 0 var(--card-shadow);
+}
+

@@ -27,12 +27,12 @@ const LoginForm = () => {
     }
     setCredentials({ ...credentials, [name]: value });
   };
-
   return (
-    <div className="min-h-screen flex items-center justify-center bg-custom-cream">
-      <form onSubmit={handleSubmit} className="shadow-md rounded px-8 pt-6 pb-8 mb-4 bg-white">
+    <div className="min-h-screen flex items-center justify-center bg-card">
+      <form onSubmit={handleSubmit} className="shadow-md rounded px-8 pt-6 pb-8 mb-4 bg-card">
+        {error && <div className="text-red-600 mb-4">{error}</div>}
         <div className="mb-4">
-          <label className="block text-custom-darkorange text-sm font-bold mb-2" htmlFor="email">
+          <label className="block text-foreground text-sm font-bold mb-2" htmlFor="email">
             Email
           </label>
           <input
@@ -41,12 +41,12 @@ const LoginForm = () => {
             type="email"
             value={credentials.email}
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border-custom rounded w-full py-2 px-3 text-foreground leading-tight focus:outline-none focus:shadow-outline"
             required
           />
         </div>
         <div className="mb-6">
-          <label className="block text-custom-darkorange text-sm font-bold mb-2" htmlFor="password">
+          <label className="block text-foreground text-sm font-bold mb-2" htmlFor="password">
             Password
           </label>
           <input
@@ -55,7 +55,7 @@ const LoginForm = () => {
             type="password"
             value={credentials.password}
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border-custom rounded w-full py-2 px-3 text-foreground mb-3 leading-tight focus:outline-none focus:shadow-outline"
             required
           />
         </div>
@@ -63,16 +63,14 @@ const LoginForm = () => {
         <div className="flex items-center justify-between">
           <button
             type="submit"
-            className="bg-custom-pink hover:bg-custom-orange text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300"
+            className="bg-custom-button hover:bg-custom-button-hover text-button-text font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300"
           >
             Login
           </button>
         </div>
         <div className="mt-4">
-          <Link href={"/register"}>
-            <span className="inline-block align-baseline font-bold text-sm text-custom-green hover:text-custom-darkorange cursor-pointer">
+          <Link href="/register" className="inline-block align-baseline font-bold text-sm text-link hover:text-link-hover cursor-pointer">
               No account? Register here.
-            </span>
           </Link>
         </div>
       </form>

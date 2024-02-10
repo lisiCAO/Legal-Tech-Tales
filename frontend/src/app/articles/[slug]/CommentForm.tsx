@@ -46,16 +46,16 @@ const CommentForm: React.FC<CommentFormProps> = ({ articleId, slug }) => {
   return (
     <form onSubmit={handleSubmit} className="mb-6">
       {error && <div className="text-red-600">{error}</div>}
-      <label htmlFor="comment" className="text-xl font-bold">My Comment:</label>
+      <label htmlFor="comment" className="block text-xl font-bold text-foreground">My Comment:</label>
       <textarea
         id="comment"
         name="comment"
         value={comment}
         onChange={(e) => setComment(e.target.value)}
         required
-        className="border border-gray-300 text-gray-700 p-2 block w-full rounded mb-2 h-24 resize-none focus:outline-none focus:ring-2 focus:ring-blue-600" 
+        className="border-custom text-foreground bg-card p-2 block w-full rounded mb-2 h-24 resize-none focus:outline-none focus:ring-custom-button"
       />
-      <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
+      <button type="submit" className="bg-custom-button text-button-text px-4 py-2 rounded hover:bg-custom-button-hover">
         Add comment
       </button>
     </form>
